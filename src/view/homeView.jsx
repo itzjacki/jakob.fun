@@ -3,7 +3,7 @@ import WindowsHeaderBar from '../components/windowsHeaderBar';
 const HomeView = () => {
   return (
     <>
-      <div className='w-full h-full win98-window'>
+      <div className='box-border w-full h-full p-1 win98-window win98-border'>
         <WindowsHeaderBar />
       </div>
     </>

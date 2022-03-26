@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .win98-window {
+    @apply bg-silver;
+  }
+  .win98-button-border {
+    @apply border-black border-l-white shadow-[inset_-1px_-1px_gray] border-t-white border active:border-white active:border-l-black active:border-t-black active:shadow-[inset_1px_1px_gray];
+  }
+  .win98-button {
+    @apply w-4 h-[14px] my-[2px] bg-silver win98-button-border;
+  }
+}

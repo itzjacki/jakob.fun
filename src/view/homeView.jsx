@@ -1,7 +1,11 @@
+import WindowsHeaderBar from '../components/windowsHeaderBar';
+
 const HomeView = () => {
   return (
     <>
-      <p className='text-xl text-red-700'>Hello World!</p>
+      <div className='w-full h-full win98-window'>
+        <WindowsHeaderBar />
+      </div>
     </>
   );
 };

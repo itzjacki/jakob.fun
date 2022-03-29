@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @layer components {
+  /* Win98-like styles */
   .win98-window {
     @apply p-1 bg-silver win98-outer-border;
   }
@@ -19,6 +20,20 @@
   }
   .win98-button {
     @apply w-4 h-[14px] my-[2px] bg-silver win98-button-border;
+  }
+
+  /* Monitor effect */
+  .monitor-outer-bezel {
+    @apply border-[60px] border-b-[100px] border-[#B9B6AF] box-border bg-[#B9B6AF];
+  }
+  .monitor-inner-bezel {
+    @apply border-[54px] border-x-[#7E7D78] border-y-[#9D9B95] box-border rounded;
+  }
+  .monitor-screen {
+    @apply box-content -mt-2 -ml-2 border-8 border-black rounded-md;
+  }
+  .monitor-screen-mobile {
+    @apply bg-[#008080];
   }
 }
 

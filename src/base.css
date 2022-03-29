@@ -4,12 +4,27 @@
 
 @layer components {
   .win98-window {
-    @apply bg-silver;
+    @apply p-1 bg-silver win98-outer-border;
   }
   .win98-button-border {
     @apply border-black border-l-white shadow-[inset_-1px_-1px_gray] border-t-white border active:border-white active:border-l-black active:border-t-black active:shadow-[inset_1px_1px_gray];
   }
+  .win98-outer-border {
+    /*Border around the outside of windows*/
+    @apply box-border border border-black border-l-silver border-t-silver;
+  }
+  .win98-inner-border {
+    /*Border around internal portions of windows*/
+    @apply box-border border border-white border-l-silver-dark border-t-silver-dark;
+  }
   .win98-button {
     @apply w-4 h-[14px] my-[2px] bg-silver win98-button-border;
   }
+}
+
+.win98-outer-border {
+  box-shadow: inset -1px -1px rgb(80, 80, 80), inset 1px 1px white;
+}
+.win98-inner-border {
+  box-shadow: inset -1px -1px rgb(192, 192, 192);
 }

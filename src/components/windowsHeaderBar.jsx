@@ -2,10 +2,10 @@ import { FaRegWindowMaximize } from 'react-icons/fa';
 import { FaRegWindowMinimize } from 'react-icons/fa';
 import { GrClose } from 'react-icons/gr';
 
-const WindowsHeaderBar = () => {
+const WindowsHeaderBar = (props) => {
   return (
     <div className='flex items-center justify-end w-full h-5 bg-navy-blue'>
-      <p className='flex-grow ml-1 text-sm text-white'>JakobKielland.exe</p>
+      <p className='flex-grow ml-1 text-sm text-white select-none'>{props.windowName}</p>
       <div className='win98-button group'>
         <FaRegWindowMinimize
           className='m-auto group-active:translate-x-[1px] group-active:translate-y-[1px]'

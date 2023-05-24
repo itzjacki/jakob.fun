@@ -4,13 +4,23 @@ Cool page with cool stuff will appear here some time between now and 2099 ✨
 
 ## ☑ TODO
 
-[ ] Make it like slightly usable on mobile
-[ ] Make it like slightly accessible
-[ ] Light and dark mode toggle + custom color scheme?
-[ ] Coolio animations?
-[ ] Blog
-[ ] Portfolio
-[ ] Other cool content
+- [ ] Make it usable
+  - [ ] Make it like slightly usable on mobile
+  - [ ] Make it like slightly accessible
+- [ ] Make it cool as fuck
+  - [ ] Light and dark mode toggle + custom color scheme?
+  - [ ] Coolio animations?
+- [ ] Make it fast as fuck
+  - [ ] Image optimization
+  - [ ] Prefetching
+  - [ ] Other stuff that makes it fast as fuck
+- [ ] Give it cool content
+  - [ ] Blog
+  - [ ] Portfolio
+  - [ ] Existing content
+  - [ ] MC stuff
+  - [ ] Other cool content
+- [ ] SEO
 
 ## 🧞 Commands
 

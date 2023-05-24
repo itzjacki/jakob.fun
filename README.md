@@ -12,6 +12,7 @@ Cool page with cool stuff will appear here some time between now and 2099 ✨
   - [ ] Coolio animations?
   - [ ] Just like cool styling shit
   - [ ] Seriously, let's just make it fucking cool
+  - [ ] Wtf you're not gonna use the default Astro favicon, right??
 - [ ] Make it fast as fuck
   - [ ] Image optimization
   - [ ] Prefetching

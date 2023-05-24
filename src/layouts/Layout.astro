@@ -1,13 +1,18 @@
 ---
+import "@/globals.css";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+
 export interface Props {
   title: string;
+  gap?: boolean;
 }
 
-const { title } = Astro.props;
+const { title, gap = false } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="bg-slate-900 text-slate-100">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -15,14 +20,11 @@ const { title } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
-  <body>
-    <slot />
+  <body class="flex min-h-screen flex-col">
+    <Header />
+    <main class=`mx-4 flex flex-1 flex-col items-center ${gap && "gap-8"}`>
+      <slot />
+    </main>
+    <Footer />
   </body>
 </html>
-<style is:global>
-  @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
-  html {
-    font-family: "Inter", sans-serif;
-    background-color: #f6f6f6;
-  }
-</style>

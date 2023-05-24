@@ -10,6 +10,8 @@ Cool page with cool stuff will appear here some time between now and 2099 ✨
 - [ ] Make it cool as fuck
   - [ ] Light and dark mode toggle + custom color scheme?
   - [ ] Coolio animations?
+  - [ ] Just like cool styling shit
+  - [ ] Seriously, let's just make it fucking cool
 - [ ] Make it fast as fuck
   - [ ] Image optimization
   - [ ] Prefetching

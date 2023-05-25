@@ -1,9 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html {
   font-family: "Inter", sans-serif;
 }
 
-/* Tailwind styles */
+/* Manual CSS */
+.transition-spacing {
+  transition-property: gap, padding;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Tailwind combinatory styles */
 .link-hover {
-  @apply transition-all duration-150 hover:text-emerald-300;
+  @apply transition-spacing duration-150 hover:text-emerald-300;
 }

@@ -9,5 +9,13 @@ const { frontmatter } = Astro.props;
     {frontmatter.title}
   </h1>
 
+  {
+    new Date(frontmatter.date).toLocaleDateString("en-US", {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    })
+  }
+
   <slot />
 </BlogBase>

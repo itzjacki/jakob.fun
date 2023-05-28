@@ -15,6 +15,7 @@ Cool page with cool stuff will appear here some time between now and 2099 ✨
   - [ ] Wtf you're not gonna use the default Astro favicon, right??
 - [ ] Make it fast as fuck
   - [ ] Image optimization
+    - [ ] Add fallback in case of no webp support?
   - [ ] Prefetching
   - [ ] Other stuff that makes it fast as fuck
 - [ ] Give it cool content
@@ -23,13 +24,18 @@ Cool page with cool stuff will appear here some time between now and 2099 ✨
   - [ ] Existing content
     - [x] La Debil
       - [ ] Improve storytelling
-    - [ ] Afterglow
+    - [x] Afterglow
     - [ ] Zulrah - host on jakob.fun?
-    - [ ] RedBlackChallenge
+    - [x] RedBlackChallenge
+    - [ ] Other things?
   - [ ] MC stuff
   - [ ] Other cool content
   - [ ] Automatically link to the content from content page
 - [ ] SEO
+
+### 🐛 Bugs
+
+- [ ] Navlinks are a little squishy on deployed version of site (FOUC problem)
 
 ## 🧞 Commands
 

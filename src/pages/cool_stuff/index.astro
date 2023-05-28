@@ -1,11 +1,71 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+
+interface Content {
+  title: string;
+  url: string;
+  imageLink: string;
+  imageAltText: string;
+}
+
+const contentArray: Array<Content> = [
+  {
+    title: "The tale of David the domain hoarder",
+    url: "/ladebil",
+    imageLink: "/images/cool_stuff/ladebil.webp",
+    imageAltText:
+      'Man holding a url, ladebil.no, with a Band logo saying "La Debil" in the background',
+  },
+  {
+    title: "The red and black challenge",
+    url: "http://redandblackchallenge.com",
+    imageLink: "/images/cool_stuff/rabc.webp",
+    imageAltText:
+      'A dark red lotus logo with text saying "Red and black challenge" on a solid black background',
+  },
+  {
+    title: "The best Zulrah pattern guide",
+    url: "http://itzjacki.com/zulrah",
+    imageLink: "/images/cool_stuff/zulrah.webp",
+    imageAltText:
+      'A screenshot from Oldschool Runescape of someone fighting the boss Zulrah, with text saying "The best Zulrah pattern guide',
+  },
+  {
+    title: "Afterglow",
+    url: "/afterglow",
+    imageLink: "/images/cool_stuff/afterglow.webp",
+    imageAltText:
+      "A screenshot from a rythm game with purple and cyan neon colors on a black background",
+  },
+];
 ---
 
 <Layout title="Cool stuff - Jakob Kielland" gap>
   <h1 class="text-4xl">Cool stuff</h1>
-  <p>
-    A collection of various more or less interesting projects and other things.
-    Enjoy! 😎
+  <p class="max-w-xl">
+    A random collection of (potentially) interesting projects and content I have
+    enjoyed creating over the years. Enjoy! 🕺
   </p>
+
+  <nav class="grid grid-cols-2 gap-8">
+    {
+      contentArray.map((content: Content) => (
+        <a
+          href={
+            content.url[0] === "/" ? `cool_stuff${content.url}` : content.url
+          }
+          class="group box-border rounded-xl border-emerald-300 bg-slate-950 p-8"
+        >
+          <img
+            src={content.imageLink}
+            alt={content.imageAltText}
+            class="h-[150px] w-[300px] rounded-lg border-2 border-slate-800 bg-slate-800"
+          />
+          <h2 class="mt-4 w-min min-w-full pt-2 text-lg decoration-emerald-300 underline-offset-4 group-hover:underline">
+            {content.title}
+          </h2>
+        </a>
+      ))
+    }
+  </nav>
 </Layout>

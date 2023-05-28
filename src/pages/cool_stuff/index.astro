@@ -35,7 +35,7 @@ const contentArray: Array<Content> = [
     url: "/afterglow",
     imageLink: "/images/cool_stuff/afterglow.webp",
     imageAltText:
-      "A screenshot from a rythm game with purple and cyan neon colors on a black background",
+      'A screenshot from a rythm game with purple and cyan neon colors on a black background, with text saying "Afterglow"',
   },
 ];
 ---
@@ -47,7 +47,7 @@ const contentArray: Array<Content> = [
     enjoyed creating over the years. Enjoy! 🕺
   </p>
 
-  <nav class="grid grid-cols-2 gap-8">
+  <nav class="grid grid-cols-1 gap-8 md:grid-cols-2">
     {
       contentArray.map((content: Content) => (
         <a

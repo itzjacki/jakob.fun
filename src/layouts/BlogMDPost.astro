@@ -1,0 +1,13 @@
+---
+import BlogBase from "@/layouts/BlogBase.astro";
+
+const { frontmatter } = Astro.props;
+---
+
+<BlogBase title={frontmatter.title}>
+  <h1>
+    {frontmatter.title}
+  </h1>
+
+  <slot />
+</BlogBase>

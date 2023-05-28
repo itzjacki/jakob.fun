@@ -21,8 +21,14 @@ Cool page with cool stuff will appear here some time between now and 2099 ✨
   - [ ] Blog
   - [ ] Portfolio
   - [ ] Existing content
+    - [x] La Debil
+      - [ ] Improve storytelling
+    - [ ] Afterglow
+    - [ ] Zulrah - host on jakob.fun?
+    - [ ] RedBlackChallenge
   - [ ] MC stuff
   - [ ] Other cool content
+  - [ ] Automatically link to the content from content page
 - [ ] SEO
 
 ## 🧞 Commands

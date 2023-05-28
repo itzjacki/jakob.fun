@@ -1,0 +1,21 @@
+---
+import BlogBase from "@/layouts/BlogBase.astro";
+
+const { frontmatter } = Astro.props;
+---
+
+<BlogBase title={frontmatter.title}>
+  <h1>
+    {frontmatter.title}
+  </h1>
+
+  {
+    new Date(frontmatter.date).toLocaleDateString("en-US", {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    })
+  }
+
+  <slot />
+</BlogBase>

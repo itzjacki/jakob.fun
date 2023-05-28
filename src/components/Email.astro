@@ -1,0 +1,46 @@
+---
+import { Icon } from "astro-icon";
+
+interface Props {
+  senderName: string;
+  title?: string;
+  avatarColor: "primary" | "secondary";
+  graphicSignature?: "ladebil";
+}
+
+const avatarColor =
+  Astro.props.avatarColor === "secondary"
+    ? "text-slate-700"
+    : "text-emerald-900";
+---
+
+<section class="mb-8 rounded-lg bg-slate-950 p-8">
+  {
+    Astro.props.title && (
+      <h2 class="mt-2 border-b border-b-slate-700 pb-4">{Astro.props.title}</h2>
+    )
+  }
+  <div class="flex gap-4">
+    <Icon
+      name="ph:user-fill"
+      class={`w-12 rounded border p-2 border-slate-600 bg-slate-900 ${avatarColor}`}
+    />
+    <strong>{Astro.props.senderName}</strong>
+  </div>
+  <slot />
+  {
+    Astro.props.graphicSignature === "ladebil" && (
+      <div class="mt-12 flex flex-col items-center text-opacity-10">
+        <div class="text-2xl">LA DÉBIL</div>
+        <div class="mb-4">Moderna y emocionante</div>
+        <div class="flex gap-4">
+          <a class="font-normal" href="mailto:redacted@idontwantspam.com">
+            Contacto
+          </a>
+          <a href="https://ladebil.bandcamp.com/album/s-ngrala">Bandcamp</a>
+          <span>All right reserved</span>
+        </div>
+      </div>
+    )
+  }
+</section>

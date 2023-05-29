@@ -18,17 +18,19 @@ Cool page with cool stuff will appear here some time between now and 2099 ✨
     - [ ] Add fallback in case of no webp support?
   - [ ] Prefetching
   - [ ] Holy fucking font file size batman
-  - [ ] Other stuff that makes it fast as fuck
+  - [ ] Other stuff that makes it fast as fuck _FUCKING_ BLAZINGLY FAST AAAAAAAA RUST!
 - [ ] Give it cool content
   - [ ] Blog
   - [ ] Portfolio
   - [ ] Existing content
     - [x] La Debil
-      - [ ] Improve storytelling
+      - [x] Improve storytelling
+      - [ ] Update after talking to guy
     - [x] Afterglow
-    - [ ] Zulrah - host on jakob.fun?
+    - [x] Zulrah guide
+      - [ ] Host on jakob.fun?
     - [x] RedBlackChallenge
-    - [ ] Other things?
+  - [ ] Polet+
   - [ ] MC stuff
   - [ ] Other cool content
   - [ ] Automatically link to the content from content page

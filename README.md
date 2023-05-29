@@ -17,6 +17,7 @@ Cool page with cool stuff will appear here some time between now and 2099 ✨
   - [ ] Image optimization
     - [ ] Add fallback in case of no webp support?
   - [ ] Prefetching
+  - [ ] Holy fucking font file size batman
   - [ ] Other stuff that makes it fast as fuck
 - [ ] Give it cool content
   - [ ] Blog

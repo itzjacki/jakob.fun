@@ -1,13 +1,13 @@
 ---
-import Layout from "@/layouts/Layout.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
 
 interface Props {
   title: string;
 }
 ---
 
-<Layout title={Astro.props.title}>
+<BaseLayout title={Astro.props.title}>
   <article class="prose prose-invert">
     <slot />
   </article>
-</Layout>
+</BaseLayout>

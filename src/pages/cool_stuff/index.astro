@@ -1,5 +1,5 @@
 ---
-import Layout from "@/layouts/Layout.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
 
 interface Content {
   title: string;
@@ -10,7 +10,7 @@ interface Content {
 
 const contentArray: Array<Content> = [
   {
-    title: "The tale of David the domain hoarder",
+    title: "The tale of David the domain name flipper",
     url: "/ladebil",
     imageLink: "/images/cool_stuff/ladebil.webp",
     imageAltText:
@@ -40,7 +40,7 @@ const contentArray: Array<Content> = [
 ];
 ---
 
-<Layout title="Cool stuff - Jakob Kielland" gap>
+<BaseLayout title="Cool stuff - Jakob Kielland" gap>
   <h1 class="text-4xl">Cool stuff</h1>
   <p class="max-w-xl">
     A random collection of (potentially) interesting projects and content I have
@@ -68,4 +68,4 @@ const contentArray: Array<Content> = [
       ))
     }
   </nav>
-</Layout>
+</BaseLayout>

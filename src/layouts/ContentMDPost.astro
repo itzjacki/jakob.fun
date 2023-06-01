@@ -1,14 +1,14 @@
 ---
-import BlogBase from "@/layouts/BlogBase.astro";
+import BaseMdPost from "@/layouts/BaseMdPost.astro";
 
 const { frontmatter } = Astro.props;
 ---
 
-<BlogBase title={frontmatter.title}>
+<BaseMdPost title={frontmatter.title}>
   <a href="/cool_stuff" class="link-hover no-underline">← Back</a>
   <h1>
     {frontmatter.title}
   </h1>
 
   <slot />
-</BlogBase>
+</BaseMdPost>

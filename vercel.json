@@ -1,14 +1,14 @@
 {
   "rewrites": [
     {
-      "source": "/:path*",
+      "source": "/(.*)",
       "has": [
         {
           "type": "host",
           "value": "kiellandholdings.com"
         }
       ],
-      "destination": "/kiellandholdings/:path*"
+      "destination": "/kiellandholdings/(.*)"
     }
   ]
 }

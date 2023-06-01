@@ -3,7 +3,8 @@
 Cool page with cool stuff will appear here some time between now and 2099 ✨
 
 ## ☑ TODO
-
+- [ ] Chores
+  - [ ] Rename BlogBase layout to MDBase
 - [ ] Make it usable
   - [ ] Make it like slightly usable on mobile
   - [ ] Make it like slightly accessible

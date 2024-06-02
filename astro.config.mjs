@@ -1,8 +1,9 @@
-import { defineConfig } from "astro/config";
-import svelte from "@astrojs/svelte";
-import vercel from "@astrojs/vercel/serverless";
-import tailwind from "@astrojs/tailwind";
-import mdx from "@astrojs/mdx";
+import { defineConfig } from "astro/config"
+import svelte from "@astrojs/svelte"
+import vercel from "@astrojs/vercel/serverless"
+import tailwind from "@astrojs/tailwind"
+import mdx from "@astrojs/mdx"
+import icon from "astro-icon"
 
 // https://astro.build/config
 export default defineConfig({
@@ -14,7 +15,8 @@ export default defineConfig({
       },
     }),
     mdx(),
+    icon(),
   ],
   output: "server",
   adapter: vercel(),
-});
+})

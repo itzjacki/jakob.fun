@@ -1,54 +1,54 @@
 ---
-import BaseLayout from "@/layouts/BaseLayout.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro"
 
 interface Content {
-  title: string;
-  url: string;
-  imageLink: string;
-  imageAltText: string;
+  title: string
+  url: string
+  imageLink: string
+  imageAltText: string
 }
 
 const contentArray: Array<Content> = [
   {
     title: "Exploring Features in Modern CSS",
-    url: "modern-css",
-    imageLink: "/images/cool_stuff/modern-css.webp",
+    url: "/modern-css",
+    imageLink: "/images/fun/modern-css.webp",
     imageAltText:
       'A purple slideshow slide with text saying "Exploring Features in Modern CSS"',
   },
   {
     title: "The red and black challenge",
     url: "http://redandblackchallenge.com",
-    imageLink: "/images/cool_stuff/rabc.webp",
+    imageLink: "/images/fun/rabc.webp",
     imageAltText:
       'A dark red lotus logo with text saying "Red and black challenge" on a solid black background',
   },
   {
     title: "The best Zulrah pattern guide",
     url: "http://itzjacki.com/zulrah",
-    imageLink: "/images/cool_stuff/zulrah.webp",
+    imageLink: "/images/fun/zulrah.webp",
     imageAltText:
       'A screenshot from Oldschool Runescape of someone fighting the boss Zulrah, with text saying "The best Zulrah pattern guide',
   },
   {
     title: "Afterglow",
     url: "/afterglow",
-    imageLink: "/images/cool_stuff/afterglow.webp",
+    imageLink: "/images/fun/afterglow.webp",
     imageAltText:
       'A screenshot from a rythm game with purple and cyan neon colors on a black background, with text saying "Afterglow"',
   },
   {
     title: "The tale of Dave the domain flipper",
     url: "/ladebil",
-    imageLink: "/images/cool_stuff/ladebil.webp",
+    imageLink: "/images/fun/ladebil.webp",
     imageAltText:
       'Man holding a url, ladebil.no, with a Band logo saying "La Debil" in the background',
   },
-];
+]
 ---
 
-<BaseLayout title="Cool stuff - Jakob Kielland" gap>
-  <h1 class="text-4xl">Cool stuff</h1>
+<BaseLayout title="Fun - Jakob Kielland" gap>
+  <h1 class="text-4xl font-bold">Fun</h1>
   <p class="max-w-xl">
     A random collection of (potentially) interesting projects and content I have
     enjoyed creating over the years. Enjoy! 🕺
@@ -58,9 +58,7 @@ const contentArray: Array<Content> = [
     {
       contentArray.map((content: Content) => (
         <a
-          href={
-            content.url[0] === "/" ? `cool_stuff${content.url}` : content.url
-          }
+          href={content.url[0] === "/" ? `fun${content.url}` : content.url}
           class="group box-border rounded-xl border-emerald-300 bg-slate-950 p-8"
         >
           <img

@@ -1,3 +1,47 @@
 ---
+import MetaInfo from "@/components/MetaInfo.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const blogEntries = await getCollection("blog");
 ---
+
+<BaseLayout title="Blog - Jakob.fun" viewTransitions gap>
+  <h1 class="text-4xl font-bold">Blog</h1>
+  <p>Sometimes I have opinions on things, sometimes I write them down too.</p>
+
+  <ul class="flex w-full max-w-prose flex-col gap-12">
+    {
+      blogEntries
+        .toSorted((entry1, entry2) => {
+          return (
+            entry2.data.publishedDate.getTime() -
+            entry1.data.publishedDate.getTime()
+          );
+        })
+        .map((entry) => (
+          <li>
+            <a
+              href={`blog/${entry.slug}`}
+              class="flex flex-col gap-2 transition-transform hover:scale-[1.02]"
+            >
+              <MetaInfo
+                date={entry.data.publishedDate}
+                transition:name={`blogMeta${entry.slug}`}
+              />
+              <h2
+                class="mb-2 font-bold"
+                transition:name={`blogHeading${entry.slug}`}
+              >
+                {entry.data.title}
+              </h2>
+              <p transition:name={`blogBody${entry.slug}`}>
+                {entry.body.substring(0, 350) +
+                  (entry.body.length > 350 ? "..." : "")}
+              </p>
+            </a>
+          </li>
+        ))
+    }
+  </ul>
+</BaseLayout>

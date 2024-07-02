@@ -1,5 +1,6 @@
 ---
 import MetaInfo from "@/components/MetaInfo.astro";
+import NewsletterSignup from "@/components/NewsletterSignup.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 export const prerender = true;
@@ -16,7 +17,7 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 ---
 
-<BaseLayout title={entry.data.title} viewTransitions gap>
+<BaseLayout title={entry.data.title} viewTransitions gap includeNewsletter>
   <div class="flex w-full max-w-prose flex-col gap-4">
     <a href="/blog" class="link-hover block no-underline">← Back</a>
     <MetaInfo

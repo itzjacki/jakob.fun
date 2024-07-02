@@ -17,8 +17,7 @@ Cool page with cool stuff will appear here some time between now and 2099 ✨
   - [ ] Seriously, let's just make it fucking cool
   - [ ] Wtf you're not gonna use the default Astro favicon, right??
 - [ ] Make it fast as fuck
-  - [ ] Image optimization
-    - [ ] Add fallback in case of no webp support?
+  - [ ] Image optimization with astro:assets and /src directory image files
   - [ ] Prefetching
   - [ ] Holy fucking font file size batman
   - [ ] Other stuff that makes it fast as fuck _FUCKING_ BLAZINGLY FAST AAAAAAAA RUST!
@@ -28,7 +27,7 @@ Cool page with cool stuff will appear here some time between now and 2099 ✨
   - [ ] Existing content
     - [x] La Debil
       - [x] Improve storytelling
-      - [ ] Update after talking to guy
+      - [x] Update after talking to guy
     - [x] Afterglow
     - [x] Zulrah guide
       - [ ] Host on jakob.fun?

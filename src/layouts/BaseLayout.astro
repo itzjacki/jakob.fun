@@ -7,10 +7,16 @@ import { ViewTransitions } from "astro:transitions";
 export interface Props {
   title: string;
   gap?: boolean;
+  includeNewsletter?: boolean;
   viewTransitions?: boolean;
 }
 
-const { title, gap = false, viewTransitions = true } = Astro.props;
+const {
+  title,
+  gap = false,
+  includeNewsletter = false,
+  viewTransitions = true,
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -32,6 +38,6 @@ const { title, gap = false, viewTransitions = true } = Astro.props;
     <main class=`mx-4 flex flex-1 flex-col items-center ${gap && "gap-8"}`>
       <slot />
     </main>
-    <Footer />
+    <Footer includeNewsletter={includeNewsletter} />
   </body>
 </html>

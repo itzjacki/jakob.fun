@@ -1,3 +1,13 @@
-<footer class="mt-16 flex justify-center bg-[#00000022] py-8">
-  Made with Astro and 🖤
+---
+import NewsletterSignup from "./NewsletterSignup.astro";
+
+export interface Props {
+  includeNewsletter: boolean;
+}
+
+const { includeNewsletter } = Astro.props;
+---
+
+<footer class="mt-16 flex flex-col items-center bg-[#00000022] py-8">
+  {includeNewsletter ? <NewsletterSignup /> : <p>Made with Astro and 💜</p>}
 </footer>

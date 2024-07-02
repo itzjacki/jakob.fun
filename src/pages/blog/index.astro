@@ -9,9 +9,14 @@ blogEntries.sort((entry1, entry2) => {
     entry2.data.publishedDate.getTime() - entry1.data.publishedDate.getTime()
   );
 });
+
+function generateExcerpt(body: string, excerpt?: string) {
+  const text = excerpt ?? body;
+  return text.substring(0, 300) + (text.length > 300 ? "..." : "");
+}
 ---
 
-<BaseLayout title="Blog - Jakob.fun" viewTransitions gap>
+<BaseLayout title="Blog - Jakob.fun" viewTransitions gap includeNewsletter>
   <h1 class="text-4xl font-bold">Blog</h1>
   <p>Sometimes I have opinions on things, sometimes I write them down too.</p>
 
@@ -34,8 +39,7 @@ blogEntries.sort((entry1, entry2) => {
               {entry.data.title}
             </h2>
             <p transition:name={`blogBody${entry.slug}`}>
-              {entry.body.substring(0, 350) +
-                (entry.body.length > 350 ? "..." : "")}
+              {generateExcerpt(entry.body, entry.data.excerpt)}
             </p>
           </a>
         </li>

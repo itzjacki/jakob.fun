@@ -6,6 +6,7 @@
 
 html {
   font-family: "Inter", sans-serif;
+  scrollbar-gutter: stable both-edges;
 }
 
 /* Manual CSS */

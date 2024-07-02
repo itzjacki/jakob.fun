@@ -1,0 +1,18 @@
+---
+export interface props {
+  date: Date;
+  author?: string;
+}
+
+const { date, author, style, ...rest } = Astro.props;
+---
+
+<p class="text-sm text-slate-400" {...rest}>
+  {
+    date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    })
+  }{author && ` ・ ${author}`}
+</p>

@@ -2,19 +2,27 @@
 import "@/globals.css";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
+import { ViewTransitions } from "astro:transitions";
 
 export interface Props {
   title: string;
   gap?: boolean;
-  includeHeader?: boolean;
+  includeNewsletter?: boolean;
+  viewTransitions?: boolean;
 }
 
-const { title, gap = false, includeHeader = true } = Astro.props;
+const {
+  title,
+  gap = false,
+  includeNewsletter = false,
+  viewTransitions = true,
+} = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="bg-slate-900 text-slate-100">
   <head>
+    {viewTransitions && <ViewTransitions />}
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link
@@ -26,10 +34,10 @@ const { title, gap = false, includeHeader = true } = Astro.props;
     <title>{title}</title>
   </head>
   <body class="flex min-h-screen flex-col">
-    {includeHeader ? <Header /> : <div class="h-10 md:h-32" />}
+    <Header />
     <main class=`mx-4 flex flex-1 flex-col items-center ${gap && "gap-8"}`>
       <slot />
     </main>
-    <Footer />
+    <Footer includeNewsletter={includeNewsletter} />
   </body>
 </html>

@@ -1,0 +1,39 @@
+---
+import MetaInfo from "@/components/MetaInfo.astro";
+import NewsletterSignup from "@/components/NewsletterSignup.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection("blog");
+  return blogEntries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<BaseLayout title={entry.data.title} viewTransitions gap includeNewsletter>
+  <div class="flex w-full max-w-prose flex-col gap-4">
+    <a href="/blog" class="link-hover block no-underline">← Back</a>
+    <MetaInfo
+      date={entry.data.publishedDate}
+      author={entry.data.author}
+      style="subtle"
+      transition:name={`blogMeta${entry.slug}`}
+    />
+    <h1 class="text-4xl font-bold" transition:name={`blogHeading${entry.slug}`}>
+      {entry.data.title}
+    </h1>
+  </div>
+  <article
+    class="prose prose-invert max-w-prose"
+    transition:name={`blogBody${entry.slug}`}
+  >
+    <Content />
+  </article>
+</BaseLayout>

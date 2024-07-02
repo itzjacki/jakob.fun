@@ -1,17 +1,17 @@
 ---
-import { Icon } from "astro-icon";
+import { Icon } from "astro-icon/components"
 
 interface Props {
-  senderName: string;
-  title?: string;
-  avatarColor: "primary" | "secondary";
-  graphicSignature?: "ladebil";
+  senderName: string
+  title?: string
+  avatarColor: "primary" | "secondary"
+  graphicSignature?: "ladebil"
 }
 
 const avatarColor =
   Astro.props.avatarColor === "secondary"
     ? "text-slate-700"
-    : "text-emerald-900";
+    : "text-emerald-800"
 ---
 
 <section class="my-12 rounded-xl bg-slate-950 p-8">
@@ -22,8 +22,8 @@ const avatarColor =
   }
   <div class="flex gap-4">
     <Icon
-      name="ph:user-fill"
-      class={`w-12 rounded border p-2 border-slate-600 bg-slate-900 ${avatarColor}`}
+      name="user"
+      class={`w-12 h-12 rounded border p-2 border-slate-600 bg-slate-900 ${avatarColor}`}
     />
     <strong>{Astro.props.senderName}</strong>
   </div>

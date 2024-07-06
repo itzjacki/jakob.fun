@@ -19,4 +19,7 @@ export default defineConfig({
   ],
   output: "server",
   adapter: vercel(),
+  redirects: {
+    '/modern-css': '/fun/modern-css'
+  }
 })

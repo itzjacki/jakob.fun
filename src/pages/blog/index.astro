@@ -22,28 +22,30 @@ function generateExcerpt(body: string, excerpt?: string) {
 
   <ul class="flex w-full max-w-prose flex-col gap-12">
     {
-      blogEntries.map((entry) => (
-        <li>
-          <a
-            href={`blog/${entry.slug}`}
-            class="flex flex-col gap-2 transition-transform hover:scale-[1.02]"
-          >
-            <MetaInfo
-              date={entry.data.publishedDate}
-              transition:name={`blogMeta${entry.slug}`}
-            />
-            <h2
-              class="mb-2 font-bold"
-              transition:name={`blogHeading${entry.slug}`}
+      blogEntries
+        .filter((entry) => !entry.data.isDraft)
+        .map((entry) => (
+          <li>
+            <a
+              href={`blog/${entry.slug}`}
+              class="flex flex-col gap-2 transition-transform hover:scale-[1.02]"
             >
-              {entry.data.title}
-            </h2>
-            <p transition:name={`blogBody${entry.slug}`}>
-              {generateExcerpt(entry.body, entry.data.excerpt)}
-            </p>
-          </a>
-        </li>
-      ))
+              <MetaInfo
+                date={entry.data.publishedDate}
+                transition:name={`blogMeta${entry.slug}`}
+              />
+              <h2
+                class="mb-2 font-bold"
+                transition:name={`blogHeading${entry.slug}`}
+              >
+                {entry.data.title}
+              </h2>
+              <p transition:name={`blogBody${entry.slug}`}>
+                {generateExcerpt(entry.body, entry.data.excerpt)}
+              </p>
+            </a>
+          </li>
+        ))
     }
   </ul>
 </BaseLayout>

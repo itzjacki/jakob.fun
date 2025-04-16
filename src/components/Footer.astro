@@ -1,5 +1,6 @@
 ---
 import NewsletterSignup from "./NewsletterSignup.astro";
+import { Icon } from "astro-icon/components"
 
 export interface Props {
   includeNewsletter: boolean;
@@ -9,5 +10,9 @@ const { includeNewsletter } = Astro.props;
 ---
 
 <footer class="mt-16 flex flex-col items-center bg-[#00000022] py-8">
-  {includeNewsletter ? <NewsletterSignup /> : <p>Made with Astro and 💜</p>}
+  {includeNewsletter ? <NewsletterSignup /> : null}
+  <nav class="flex gap-4">Find me on:
+    <a class="link-hover flex align-middle" href="https://github.com/itzjacki"><Icon class="size-6" name="github-logo"/>GitHub</a>
+    <a class="link-hover flex align-middle" href="https://www.linkedin.com/in/jakobkielland/"><Icon class="size-6" name="linkedin-logo"/>LinkedIn</a>
+  </nav>
 </footer>

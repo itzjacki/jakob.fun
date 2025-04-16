@@ -1,0 +1,74 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import TalkAtConference from "@/components/TalkAtConference.astro";
+---
+
+<BaseLayout title="Speaking - Jakob Kielland" gap>
+  <h1 class="text-4xl font-bold">Speaking</h1>
+  <seciton class="flex max-w-prose flex-col gap-4">
+    <p>
+      I've had the pleasure of getting to speak at quite a few conferences, and
+      have had a blast doing so. I have a passion for teaching that I really get
+      to nurture when I create talks, and it's something I already know I will
+      keep doing for much of my career.
+    </p>
+    <p>
+      Below you can find a list of all the conferences I have spoken at, or have
+      received confirmation from regarding a future talk. Most of the talks were
+      filmed, in which case I've included a link here.
+    </p>
+  </seciton>
+  <!-- MVP. Could do with a rewrite both for my own comfort and for aesthetics' sake -->
+  <!-- Should this be a list rather than headings? -->
+  <section class="flex w-full max-w-prose flex-col gap-4">
+    <h2 class="font-bold">
+      Swiss cheese, teamwork and other things we should learn from the aviation
+      industry
+    </h2>
+    <ul class="flex flex-col gap-2">
+      <TalkAtConference
+        name="NDC Oslo 2025"
+        date="2025-05"
+        pageLink="https://ndcoslo.com/agenda/swiss-cheese-teamwork-and-other-things-we-should-learn-from-the-aviation-industry-0z8q/0lnetrji357"
+      />
+    </ul>
+    <h2 class="font-bold">
+      View Transitions: The brand-new browser API that will blow your mind
+    </h2>
+    <ul class="flex flex-col gap-2">
+      <TalkAtConference
+        name="Booster 2025"
+        date="2025-03"
+        videoLink="https://vimeo.com/1069766487"
+      />
+    </ul>
+    <h2 class="font-bold">Exploring Features in Modern CSS</h2>
+    <ul class="flex flex-col gap-2">
+      <TalkAtConference
+        name="TDC 2024"
+        date="2024-10"
+        videoLink="https://youtu.be/hqZYylIXQSg"
+      />
+      <TalkAtConference
+        name="HelloStavanger 2024"
+        date="2024-10"
+        pageLink="https://2024.hellostavanger.no/talks/642364"
+      />
+      <TalkAtConference
+        name="JavaZone 2024"
+        date="2024-09"
+        videoLink="https://vimeo.com/1006244990"
+      />
+      <TalkAtConference
+        name="NDC Oslo 2024"
+        date="2024-06"
+        videoLink="https://youtu.be/WQSJpEcnzIE"
+      />
+      <TalkAtConference
+        name="Booster 2024"
+        date="2024-03"
+        videoLink="https://vimeo.com/923680721"
+      />
+    </ul>
+  </section>
+</BaseLayout>

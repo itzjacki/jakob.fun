@@ -1,0 +1,35 @@
+---
+import { Icon } from "astro-icon/components";
+
+export interface props {
+  date: string;
+  name: string;
+  videoLink?: string;
+  pageLink?: string;
+}
+
+const { date, name, videoLink, pageLink } = Astro.props;
+---
+
+<li class="list-inside list-disc">
+  <span class="font-mono text-slate-400">{date}</span>
+  <span>{name}</span>
+  {
+    videoLink && (
+      <span class="text-slate-400">-</span>
+      <a href={videoLink} class="link-hover inline-flex gap-2 text-slate-400">
+        <span>Video</span>
+        <Icon name="video" class="size-6" />
+      </a>
+    )
+  }
+  {
+    pageLink && (
+      <span class="text-slate-400">-</span>
+      <a href={pageLink} class="link-hover inline-flex gap-2 text-slate-400">
+        <span>Info</span>
+        {/* <Icon name="video" class="size-6" /> */}
+      </a>
+    )
+  }
+</li>

@@ -18,5 +18,5 @@ html {
 
 /* Tailwind combinatory styles */
 .link-hover {
-  @apply transition-spacing duration-150 hover:text-emerald-300;
+  @apply transition-all duration-150 hover:text-emerald-300;
 }

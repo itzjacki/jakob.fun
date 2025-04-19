@@ -1,0 +1,171 @@
+---
+title: A beautiful city that nobody wants to live in
+publishedDate: 2025-04-19
+author: Jakob Endrestad Kielland
+isDraft: false
+excerpt: "When I was a student I shared an apartment with one of my closest friends, who has a degree in city planning. You'd never know it, but it's amazing how many thunderous 4 AM speeches on why Brasilia sucks and Jan Gehl is the second coming of Jesus Christ you can fit into a 3-year period when you combine alcohol with enthusiasm for the field of city planning."
+---
+
+import { Image } from "astro:assets";
+import AsideBlock from "@/components/AsideBlock.astro";
+
+When I was a student I shared an apartment with one of my closest friends, who has a degree in city planning. You'd never know it, but it's amazing how many thunderous 4 AM speeches on why Brasilia sucks and [Jan Gehl](https://en.wikipedia.org/wiki/Jan_Gehl) is the second coming of Jesus Christ you can fit into a 3-year period when you combine alcohol with enthusiasm for the field of city planning.
+
+Specifically, there is an [outstanding TEDx-talk](https://youtu.be/Cgw9oHDfJ4k) that we kept coming back to, in which the speaker, the aforementioned architect, slams the aforementioned capital by describing something he calls _Brasilia syndrome_:
+
+> Brasilia is great. It looks fantastic from the airplane - it's an eagle […] and the head of the eagle is the parliament. Also from the helicopter Brasilia is absolutely great. […] They have their various architectural monuments and they have their enormous parks. Great.
+>
+> But what is not great in Brasilia is how people are treated, because nobody thought about that there would be people walking and moving about. […] They never thought about that there would be no money to give everyone a helicopter so they really could enjoy Brasilia.
+
+He is saying that the city planners of Brasilia, a city that was planned and built from scratch in the 50s, seemingly forgot that they needed to make a city that was actually pleasant to live in, not just a city that looks good from above. The city planning doesn't serve those who actually live and work there. If we look at a few pictures of Brasilia it's easy to see what he means. Sure, it looks sick on a map, but if you zoom into a random street there's a good chance it will feel barren, lifeless and downright uncomfortable because of the huge open spaces, enormous sight lines, and massive roads.
+
+<figure>
+  <Image
+    src="/images/blog/a-beautiful-city-that-nobody-wants-to-live-in/brasilia.jpg"
+    alt="A satelite view of Brasilia, a city shaped like an eagle, next to a shot from street level showing a barren, desolate pathway"
+    width="1200"
+    height="800"
+    class="mx-auto"
+  />
+  <figcaption class="text-center">
+    Brasilia from the airplane versus Brasilia on foot
+  </figcaption>
+</figure>
+
+The reason I bring this up isn't only so you have a new topic to impress your dinner party guests with (or bore, if they don't all happen to be city planners), it's because we programmers also have a tendency to get Brasilia syndrome. We imagine these grand designs, these beautiful, elegant abstractions that will let us expand our code with a flick of the wrist, but get tangled up in our own spider web of complexity and end up with something that feels awful to work with. We end up with huge streets and empty parks.
+
+## You're probably using CSS wrong
+
+I'd wager that I care more about CSS than the average developer, and this blog post is about how I believe we should be thinking about CSS in projects that meet the following three criteria:
+
+- The project uses some sort of framework or library that lets you write reusable UI components, ie. React or Astro
+- The project includes multiple developers
+- At least one of the developers is _not_ a multi-disciplinarian developer-designer who is good at (and interested in) building a design system
+
+In other words, _most_ of today's frontend projects.
+
+Now, if you, upon reading the title of this section, rolled your eyes and went “and I bet you think you can show me the right way to use CSS?” then consider your expectations successfully subverted. On the contrary, the whole point is that using CSS _right_ is a trap that most developers should try to avoid falling into. It's the frontend version of Brasilia syndrome, and we should actually be misusing the language even more than we are already doing. But before we get to that, let's talk a bit more about the cascade.
+
+## The (genuinely) fantastic cornerstone of CSS
+
+The idea behind the cascade is fantastic, it truly is. For those of you who primarily know the cascade as the first letter in CSS, a quick recap:
+
+The cascade is the mechanism that decides which styles should be applied to each element. Styles clash in CSS all the time, and the browser needs to know how to prioritize one set of styles over another. Specificity is one part of the cascade, and probably the one we spend the most calories worrying about, but there are other parts too; [cascade layers](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Cascade_layers) and the `!important` flag, for instance.
+
+The idea behind the cascade, and arguably the central idea behind CSS, is a really powerful one: To provide us with the tools to let us specify how our site should be styled, using a predictable and powerful mechanism that lets us conditionally prioritize styles from different sources based on the structure of the elements being styled. The implications of these capabilities should not be underestimated: It means we can have one stylesheet, apply it across our entire site, and provided we haven't messed up somewhere we're free to add as much markup as we want, wherever we want, without having to also define the style for all of that markup. Or in other words, it enables a separation of concerns for our markup and styling, as [this blog post](https://www.adavanzo.com/articles/2025/the-systemic-failure-of-implementing-css-principles) repeatedly points out the importance of. As an aside, that post is actually what inspired me to write this one (much in the same way that a colleague's really smelly lunch inspires my eyes to roll backwards into my head).
+
+This type of total separation is awesome in theory, but very difficult in practice, especially with today's frameworks and use cases making our web applications vastly more complex than those seen at the dawn of the World Wide Web.
+
+Unless you're someone who's good at (and interested in) CSS, and who at the same time wants to act as a maintainer of a design system, it's really hard to create these stylesheets. Because you really are creating a design system. These are styles that are applied to all the code in the project and so any CSS affecting HTML elements or reusable classes has to work for all the places it will be used. My experience is that it becomes nigh-impossible when you have multiple developers working in tandem while also creating an application built with reusable components (be it React or something else).
+
+In other words, I think that this genuinely awesome idea is the root of why CSS has a tendency to get painful as a project grows. The reusability and potential for modularity inherently built into CSS is our Brasilia eagle; something beautiful and tempting which in practice makes us forget to write code that's actually pleasant to live with for the years to come.
+
+## A house of cards in a foggy room
+
+If you've ever caught an `!important` in a coworker's pull request (and especially if you've been the coworker) you're likely quite familiar with how opaque the specificity mechanism in the cascade can be. As your project grows and you apply more and more of your reusable classes to the same elements it can get really difficult to manage specificity. You might need to shuffle some selectors around for one modifier class to correctly override another, and addition by addition, change by change, your CSS starts looking more like an interconnected network and less like an orderly set of purposefully crafted selectors. As this network grows, the likelihood of a cascading (hehe) specificity problem increases. Every project I've worked on that has tried to use CSS as the main driver of style reusability has eventually turned into a house of cards that becomes increasingly frustrating to work on if you want to avoid toppling the structure.
+
+Changing the specificity of an existing selector in this type of project has the potential to create specificity problems five new places. Because of that, my experience is that you often end up making new css snippets with arbitrarily long chains of selectors to achieve the specificity you need, or even worse, hit the panic button.
+
+<figure>
+  <Image
+    src="/images/blog/a-beautiful-city-that-nobody-wants-to-live-in/panic-button.jpg"
+    alt="A meme depicting a hand with the text 'me wanting to get the PR out by the end of the day' hitting a button with the text '!important'"
+    width="677"
+    height="481"
+    class="mx-auto"
+  />
+  <figcaption class="text-center">We've all been there</figcaption>
+</figure>
+
+## The Multi-Dimensional Dependency Matrix of Pain and Death
+
+Successfully constructing and maintaining the Brasilia eagle without frustrating future developers is difficult even in a project where you're just using pure HTML, but if you introduce reusable code components, for example by using React, without scoping your CSS, you will almost inevitably construct The Multi-Dimensional Dependency Matrix of Pain and Death (TMDDMPD, really rolls off the tongue).
+
+CSS, when not scoped, is a fully-featured _reusability mechanism_ for your styling, it gives you everything you need to reuse your styles anywhere you might wish to do so. Let's think of our interface as a set of “blocks”, or sets of elements that belong together. These could be forms, modals, navigation panels, or what have you, the point is that you'd typically work on one block at a time, whether you're making one from scratch or changing an existing one. Each block can use many CSS classes, and likewise, each class can be used in many blocks - or in entity-relation-speak, they have an N:N-relationship.
+
+<figure>
+  <Image
+    src="/images/blog/a-beautiful-city-that-nobody-wants-to-live-in/dependency-matrix-1.png"
+    alt="Diagram showing three blocks (Block 1, Block 2, Block 3) each connected to one or more CSS classes (.class-1, .class-2, .class-3). Block 1 connects to .class-1 and .class-2, Block 2 connects to .class-2, and Block 3 connects to .class-3."
+    width="1110"
+    height="932"
+    class="mx-auto"
+  />
+  <figcaption class="text-center">So far, so good</figcaption>
+</figure>
+
+As an application grows large, these sets of N:N dependencies can become quite the pain point, especially when you have to go back and change an existing part of the application. Now, lets introduce React components! On top of letting you create reusable modules of structure and functionality, they practically _also_ serve as a reusability mechanism for your styling.
+
+You probably see where this is going. Each block of functionality can contain several React components, and each React component can be used in several “blocks” of functionality. In addition, React components and CSS classes naturally have the same relationship as our blocks and CSS classes had earlier. In other words, we have two sets of N:N-relationships stacked back-to-back. Yikes!
+
+<figure>
+  <Image
+    src="/images/blog/a-beautiful-city-that-nobody-wants-to-live-in/dependency-matrix-2.png"
+    alt="Expanded diagram introducing a middle layer of React components between blocks and CSS classes. Each block (Block 1, Block 2, Block 3) is connected to one or more React components (React component 1, 2, 3), which in turn are connected to corresponding CSS classes. The dependencies are interlinked, showing shared usage of components and styles."
+    width="1726"
+    height="902"
+    class="mx-auto"
+  />
+  <figcaption class="text-center">Ruh roh</figcaption>
+</figure>
+
+<AsideBlock emoji="📌">
+  You could certainly argue that you already have this kind of graph just due to
+  the fact that you're nesting React components. There is some truth to that,
+  but it's mitigated by a couple of things:
+  <ul>
+    <li>
+      In practice, most React components don't have both a large number of
+      dependencies and dependents. If a component is used in a lot of places
+      it's most likely quite basic, and doesn't itself depend on many
+      components.
+    </li>
+    <li>
+      React components usually have natural “borders”. If we are using a button
+      component to create a form component, it's obvious that styling that
+      concerns the button should go in the button component, and likewise for
+      the form component. This distinction might not necessarily be as easy to
+      make when deciding whether we should make a reusable component or a
+      reusable CSS class.
+    </li>
+  </ul>
+</AsideBlock>
+
+Having a complex dependency graph isn't necessarily untenable, especially if you have tooling that helps you navigate it, but it will quickly get frustrating, especially when you're making changes to existing code (as opposed to writing new code). My experience is that trying to figure out exactly which pieces of UI would be affected by changing something in this sort of multi-dimensional dependency hell quickly devolves into the `ctrl-f` equivalent of a bar fight where your opponent is every developer who has ever touched the codebase (including past and future versions of yourself). The natural consequence of this is that everyone starts making small one-off-classes instead of editing the generic styles, and at that point you've already lost the advantages of having reusable, generic CSS classes. You've successfully managed to combine the tedium of scoped styling with the mental overhead of reusable styles. Does this sound familiar? (If this is you, know that I don't judge you. This has happened to me too, and like a [boiling frog](https://en.wikipedia.org/wiki/Boiling_frog) I didn't realize what was happening until everything was already very unpleasant.)
+
+## … And you should use it even more wrongly
+
+> Okay smart-ass, so what do you figure the solution is?
+
+\- You, probably
+
+So far, the only constructive thing I've done has been to hint at the solution to this. The worst part (for you) is that even after enduring this 2000-word rant you won't become privy to some grand secret. On the contrary, the idea that's gonna help us solve these problems is so popular and unoriginal that it's there are about a million tools and libraries we can use to implement it: Scoped CSS.
+
+Using the full power of the cascade is tempting, because it creates a beautiful, minimalistic abstraction that minimizes duplication and maximizes reusability, but in my opinion it's simply too costly to do it properly. By conceding that we've lost this battle, that global stylesheets are dead, and that from here on out CSS is only to be used when scoped, we will end up with less complex code bases, spend less time fighting with CSS, and ship products faster.
+
+I don't think the exact tool you use to scope your CSS matters very much, the point is that the CSS can only apply to the stuff in its immediate vicinity. The styling belonging to a component should only ever be able to affect elements that are a part of that component - nothing above and nothing below. Personally I'm a big fan of using [Tailwind](https://tailwindcss.com/) for this, partially because its tendency of making you repeat yourself is a great way to force you to be conscious about exactly how you leverage components. Tailwind, being the most polarizing topic in all of frontend development, is a blog post for itself though, and I've had great experiences using [CSS modules](https://github.com/css-modules/css-modules) to achieve the same thing. Since CSS modules still use classes it means we as developers can still have a little bit of (contained) reusability, as a treat. Another benefit versus something something like Tailwind is that you do not need to learn any new syntax since it's just CSS, but scoped.
+
+<AsideBlock emoji="📌">
+  When using something like CSS modules I'd argue you should always forbid the use of element selectors with a linter. This is because it helps prevent smaller, but still frustrating TMDDMPDs, as well as protecting you from situations where styling is inadvertently applied or removed just because you finally got around to changing that `<div>` into a `<nav>`. By allowing only class-based selectors we guarantee that applying styling a conscious choice.
+</AsideBlock>
+
+<figure>
+  <Image
+    src="/images/blog/a-beautiful-city-that-nobody-wants-to-live-in/dependency-matrix-3.png"
+    alt="Refined dependency diagram with a layered structure: Blocks on the left, React components in the middle, and CSS classes on the right. Each block links to one or more components, and each component links to one or more CSS classes. The diagram shows a cleaner, more hierarchical structure compared to the second figure."
+    width="1718"
+    height="1532"
+    class="mx-auto"
+  />
+  <figcaption class="text-center">
+    Bigger, yes, but much less stress-inducing
+  </figcaption>
+</figure>
+
+If we look at what this does to our dependency graph from earlier, it's clear that while we have some code duplication, it's a much less complex environment to make changes in. If it's very important that the `.class-2` should always be the same for React components 1 and 2, then it should probably be in a component of its own. If it's not important, then it means we had [the wrong abstraction](https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction) (if you haven't read that Sandi Metz blog post, trust me when I say it's impossible to regret spending 5 minutes reading it).
+
+Going from a project with “normal CSS” to one where all CSS is scoped feels like going from JavaScript to TypeScript, seriously. You might not notice a very clear difference as you switch, but you sure as hell notice it if you have the misfortune of going back. This one change will remove heaps of mental overhead, make the act of changing existing styling feel safe and easy, and you get to never worry about a class name again. And the only thing it will cost you is that it means you have to write the same CSS a bit more often. In a sense you can think of it as trading away a bit of convenience when writing code in order to gain a lot of convenience when changing and removing code, and that's a trade I'm willing to make any day.
+
+## Epilogue
+
+This is obviously a nuanced topic. I'm not saying you should never reuse any CSS, but I do think there's a good argument for saying that using tools that let you scope your CSS should be the default, especially in larger projects with multiple developers. I think that much of the frontend world is slowly realizing the same thing, which is probably why frameworks like [Astro](https://docs.astro.build/en/guides/styling/#scoped-styles) require you to explicitly opt-out of scoped styling, instead of the other way around. So, haven't tried Tailwind yet? Give it a shot. Tried it and still want to scoop out your eyes with a rusty spoon when you see a 200-character class attribute? Maybe go with CSS modules instead.

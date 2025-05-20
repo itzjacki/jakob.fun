@@ -22,5 +22,6 @@ export default defineConfig({
   adapter: vercel(),
   redirects: {
     "/modern-css": "/fun/modern-css",
+    "/swiss-cheese": "/fun/swiss-cheese",
   },
 });

@@ -54,9 +54,9 @@ The cascade is the mechanism that decides which styles should be applied to each
 
 The idea behind the cascade, and arguably the central idea behind CSS, is a really powerful one: To provide us with the tools to let us specify how our site should be styled, using a predictable and powerful mechanism that lets us conditionally prioritize styles from different sources based on the structure of the elements being styled. The implications of these capabilities should not be underestimated: It means we can have one stylesheet, apply it across our entire site, and provided we haven't messed up somewhere we're free to add as much markup as we want, wherever we want, without having to also define the style for all of that markup. Or in other words, it enables a separation of concerns for our markup and styling, as [this blog post](https://www.adavanzo.com/articles/2025/the-systemic-failure-of-implementing-css-principles) repeatedly points out the importance of. As an aside, that post is actually what inspired me to write this one (sort of in the same way that an unnecessarily smelly lunch in the office inspires my eyes to roll backwards into my head).
 
-This type of total separation is awesome in theory, but very difficult in practice, especially with today's frameworks and use cases making our web applications vastly more complex than those seen at the dawn of the World Wide Web.
+This type of total separation is awesome in theory, but very difficult in practice, especially with today's frameworks and use cases making our web applications vastly more complex than those seen at the dawn of the World Wide Web. So while I genuinely like the idea of using all the corners of the cascades to create a universal design-system-stylesheet, I think this sort of approach scales so horrendously badly for today's complex applications that it's almost inevitable that you will end up with what's effectively an append-only CSS file instead.
 
-Unless you're someone who's good at (and interested in) CSS, and who at the same time wants to act as a maintainer of a design system, it's really hard to create these universal stylesheets. Because you aren't really just writing CSS, you're creating a design system. These are styles that are applied to all the markup in the project (or at least a significant part of it) and so any reusable classes or styling that uses element selectors has to work for all the places it could conceivably be used. My experience is that this task becomes nigh-impossible when you have multiple developers working on different parts of the application at the same time, while also leveraging reusable components (be it with React or something else).
+Unless you're someone who's good at (and interested in) CSS, and who at the same time wants to act as a maintainer of a design system, it's really hard to create these universal stylesheets. Because you aren't really just writing CSS, you're creating a design system. These are styles that are applied to all the markup in the project (or at least a significant part of it) and so any reusable classes or styling that uses element selectors has to work for all the places it could conceivably be used. My experience is that this task becomes nigh-impossible when you have multiple developers working on different parts of the application at the same time, while also leveraging reusable components (for the sake of this blog post the framework used doesn't matter, you can imagine React components, Svelte components, or whatever else you like).
 
 In other words, I think that this genuinely awesome idea is the root of why CSS has a tendency to get painful as a project grows. The reusability and potential for modularity inherently built into CSS is our Brasilia eagle; something beautiful and tempting which in practice makes us forget to write code that's actually pleasant to live with in the years to come.
 
@@ -68,7 +68,7 @@ CSS, when not scoped, is a fully-featured _reusability mechanism_ for your styli
 
 <figure>
   <Image
-    src="/images/blog/a-beautiful-city-that-nobody-wants-to-live-in/dependency-matrix-1.png"
+    src="/images/blog/a-beautiful-city-that-nobody-wants-to-live-in/dependency-matrix-1.svg"
     alt="Diagram showing three blocks (Block 1, Block 2, Block 3) each connected to one or more CSS classes (.class-1, .class-2, .class-3). Block 1 connects to .class-1 and .class-2, Block 2 connects to .class-2, and Block 3 connects to .class-3."
     width="1110"
     height="932"
@@ -77,14 +77,14 @@ CSS, when not scoped, is a fully-featured _reusability mechanism_ for your styli
   <figcaption class="text-center">This is fine!</figcaption>
 </figure>
 
-As an application grows large, these sets of dependencies can become quite the pain point, especially when you have to go back and change an existing part of the application. Now, lets introduce React components! On top of letting you create reusable modules of structure and functionality, they practically _also_ serve as a reusability mechanism for your styling.
+As an application grows large, these sets of dependencies can become quite the pain point, especially when you have to go back and change an existing part of the application. Now, lets introduce components! On top of letting you create reusable modules of structure and functionality, they practically _also_ serve as a reusability mechanism for your styling.
 
-You probably see where this is going. Each block of functionality can contain several React components, and each React component can be used in several “blocks” of functionality. In addition, React components and CSS classes naturally have the same relationship as our blocks and CSS classes had earlier. In other words, we have two sets of N:N-relationships stacked back-to-back. Yikes!
+You probably see where this is going. Each block of functionality can contain several components, and each component can be used in several “blocks” of functionality. In addition, components and CSS classes naturally have the same relationship as our blocks and CSS classes had earlier. In other words, we have two sets of N:N-relationships stacked back-to-back. Yikes!
 
 <figure>
   <Image
-    src="/images/blog/a-beautiful-city-that-nobody-wants-to-live-in/dependency-matrix-2.png"
-    alt="Expanded diagram introducing a middle layer of React components between blocks and CSS classes. Each block (Block 1, Block 2, Block 3) is connected to one or more React components (React component 1, 2, 3), which in turn are connected to corresponding CSS classes. The dependencies are interlinked, showing shared usage of components and styles."
+    src="/images/blog/a-beautiful-city-that-nobody-wants-to-live-in/dependency-matrix-2.svg"
+    alt="Expanded diagram introducing a middle layer of components between blocks and CSS classes. Each block (Block 1, Block 2, Block 3) is connected to one or more components (component 1, 2, 3), which in turn are connected to corresponding CSS classes. The dependencies are interlinked, showing shared usage of components and styles."
     width="1726"
     height="902"
     class="mx-auto"
@@ -98,17 +98,17 @@ You probably see where this is going. Each block of functionality can contain se
 
 <AsideBlock emoji="📌">
   You could certainly argue that you already have this kind of graph just due to
-  the fact that you're nesting React components. There is some truth to that,
-  but it's mitigated by a couple of things:
+  the fact that you're nesting components. There is some truth to that, but it's
+  mitigated by a couple of things:
   <ul>
     <li>
-      In practice, most React components don't have both a large number of
+      In practice, most components don't have both a large number of
       dependencies and dependents. If a component is used in a lot of places
       it's most likely quite basic, and doesn't itself depend on many
       components.
     </li>
     <li>
-      React components usually have natural “borders”. If we are using a button
+      Components usually have natural “borders”. If we are using a button
       component to create a form component, it's obvious that styling that
       concerns the button should go in the button component, and likewise for
       the form component. This distinction might not necessarily be as easy to
@@ -130,7 +130,7 @@ So far, the only constructive thing I've done has been to hint at the solution t
 
 Using the full power of the cascade is tempting, because it creates a beautiful, minimalistic abstraction that minimizes duplication and maximizes reusability, but in my opinion it's simply too costly to do it properly. By conceding that we've lost this battle, that global stylesheets are dead, and that from here on out CSS is only to be used when scoped, we will end up with less complex code bases, spend less time fighting with CSS, and ship products faster.
 
-I don't think the exact tool you use to scope your CSS matters very much, the point is that the CSS can only apply to the stuff in its immediate vicinity. The styling belonging to a component should only ever be able to affect elements that are a part of that component -- nothing above and nothing below. Personally I'm a big fan of using [Tailwind](https://tailwindcss.com/) for this, partially because its tendency of making you repeat yourself is a great way to force you to be conscious about exactly how you leverage components. Tailwind, being the most polarizing topic in all of frontend development, is a blog post for itself though, and I've had great experiences using [CSS modules](https://github.com/css-modules/css-modules) to achieve the same thing. Since CSS modules still use classes it means we as developers can still have a little bit of (contained) reusability, as a treat. Another benefit versus something like Tailwind is that you do not need to learn any new syntax since it's just CSS, but scoped.
+I don't think the exact tool you use to scope your CSS matters very much, the point is that the CSS can only apply to the stuff in its immediate vicinity. The styling belonging to a component should only ever be able to affect elements that are a part of that component -- nothing above and nothing below. Personally I'm a big fan of using [Tailwind](https://tailwindcss.com/) for this, partially because its tendency of making you repeat yourself is a great way to force you to be conscious about exactly how you leverage components. Tailwind, being the most polarizing topic in all of frontend development, is a blog post for itself though, and I've had great experiences using [CSS modules](https://github.com/css-modules/css-modules) to achieve the same goal. Since CSS modules still use classes it means we as developers can still have a little bit of (contained) reusability, as a treat. Another benefit versus something like Tailwind is that you do not need to learn any new syntax since it's just CSS, but scoped.
 
 <AsideBlock emoji="📌">
   When using something like CSS modules I'd recommend forbidding the use of element selectors with a linter. This is because it helps prevent smaller, but still frustrating TMDDMPDs, as well as protecting you from situations where styling is inadvertently applied or removed just because you finally got around to changing that `<div>` into a `<nav>`. By allowing only class-based selectors we guarantee that applying styling a conscious choice.
@@ -138,8 +138,8 @@ I don't think the exact tool you use to scope your CSS matters very much, the po
 
 <figure>
   <Image
-    src="/images/blog/a-beautiful-city-that-nobody-wants-to-live-in/dependency-matrix-3.png"
-    alt="Refined dependency diagram with a layered structure: Blocks on the left, React components in the middle, and CSS classes on the right. Each block links to one or more components, and each component links to one or more CSS classes. The diagram shows a cleaner, more hierarchical structure compared to the second figure."
+    src="/images/blog/a-beautiful-city-that-nobody-wants-to-live-in/dependency-matrix-3.svg"
+    alt="Refined dependency diagram with a layered structure: Blocks on the left, components in the middle, and CSS classes on the right. Each block links to one or more components, and each component links to one or more CSS classes. The diagram shows a cleaner, more hierarchical structure compared to the second figure."
     width="1718"
     height="1532"
     class="mx-auto"
@@ -149,7 +149,7 @@ I don't think the exact tool you use to scope your CSS matters very much, the po
   </figcaption>
 </figure>
 
-If we look at what this does to our dependency graph from earlier, it's clear that while we have some code duplication, it's a much less complex environment to make changes in. If it's very important that the `.class-2` should always be the same for React components 1 and 2, then it should probably be a React component instead. If it's not that important, then it means we had [the wrong abstraction](https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction) (if you haven't read that Sandi Metz blog post, trust me when I say it's impossible to regret spending 5 minutes reading it).
+If we look at what this does to our dependency graph from earlier, it's clear that while we have some code duplication, it's a much less complex environment to make changes in. If it's very important that the `.class-2` should always be the same for components 1 and 2, then it should probably be a standalone component instead. If it's not that important, then it means we had [the wrong abstraction](https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction) (if you haven't read that Sandi Metz blog post, trust me when I say it's impossible to regret spending 5 minutes reading it).
 
 Going from a project with “normal CSS” to one where all CSS is scoped feels like going from JavaScript to TypeScript, seriously. You might not notice a very clear difference as you switch, but you'll sure as hell notice it if you have the misfortune of going back. This one change will remove heaps of mental overhead, make the act of changing existing styling feel safe and easy, and guarantee that you never have to worry about what to name a CSS class again. The only thing it will cost you is that you'll have to write the same CSS a bit more often. In a sense you can think of it as trading away a bit of convenience when writing code in order to gain a lot of convenience when changing and removing code, and that's a trade I'm willing to make any day.
 

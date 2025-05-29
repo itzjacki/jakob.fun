@@ -11,6 +11,9 @@ export default defineConfig({
   integrations: [mdx(), icon()],
   output: "server",
   adapter: vercel(),
+  prefetch: {
+    prefetchAll: true,
+  },
 
   redirects: {
     "/modern-css": "/fun/modern-css",

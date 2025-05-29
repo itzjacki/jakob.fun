@@ -10,8 +10,8 @@ blogEntries.sort((entry1, entry2) => {
   );
 });
 
-function generateExcerpt(body: string, excerpt?: string) {
-  const text = excerpt ?? body;
+function generateExcerpt(body?: string, excerpt?: string) {
+  const text = excerpt ?? body ?? "";
   return text.substring(0, 300) + (text.length > 300 ? "..." : "");
 }
 ---
@@ -27,20 +27,20 @@ function generateExcerpt(body: string, excerpt?: string) {
         .map((entry) => (
           <li>
             <a
-              href={`blog/${entry.slug}`}
+              href={`blog/${entry.id}`}
               class="flex flex-col gap-2 transition-transform hover:scale-[1.02]"
             >
               <MetaInfo
                 date={entry.data.publishedDate}
-                transition:name={`blogMeta${entry.slug}`}
+                transition:name={`blogMeta${entry.id}`}
               />
               <h2
                 class="mb-2 font-bold"
-                transition:name={`blogHeading${entry.slug}`}
+                transition:name={`blogHeading${entry.id}`}
               >
                 {entry.data.title}
               </h2>
-              <p transition:name={`blogBody${entry.slug}`}>
+              <p transition:name={`blogBody${entry.id}`}>
                 {generateExcerpt(entry.body, entry.data.excerpt)}
               </p>
             </a>

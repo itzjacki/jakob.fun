@@ -1,8 +1,7 @@
 ---
 import MetaInfo from "@/components/MetaInfo.astro";
-import NewsletterSignup from "@/components/NewsletterSignup.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 export const prerender = true;
 
 export async function getStaticPaths() {
@@ -10,13 +9,13 @@ export async function getStaticPaths() {
   return blogEntries
     .filter((entry) => !entry.data.isDraft)
     .map((entry) => ({
-      params: { slug: entry.slug },
+      params: { slug: entry.id },
       props: { entry },
     }));
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 ---
 
 <BaseLayout title={entry.data.title} viewTransitions gap includeNewsletter>
@@ -26,15 +25,15 @@ const { Content } = await entry.render();
       date={entry.data.publishedDate}
       author={entry.data.author}
       style="subtle"
-      transition:name={`blogMeta${entry.slug}`}
+      transition:name={`blogMeta${entry.id}`}
     />
-    <h1 class="text-4xl font-bold" transition:name={`blogHeading${entry.slug}`}>
+    <h1 class="text-4xl font-bold" transition:name={`blogHeading${entry.id}`}>
       {entry.data.title}
     </h1>
   </div>
   <article
     class="prose prose-invert max-w-prose"
-    transition:name={`blogBody${entry.slug}`}
+    transition:name={`blogBody${entry.id}`}
   >
     <Content />
   </article>

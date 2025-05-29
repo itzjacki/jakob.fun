@@ -18,7 +18,7 @@ const { entry } = Astro.props;
 const { Content } = await render(entry);
 ---
 
-<BaseLayout title={entry.data.title} viewTransitions gap includeNewsletter>
+<BaseLayout title={entry.data.title} gap includeNewsletter>
   <div class="flex w-full max-w-prose flex-col gap-4">
     <a href="/blog" class="link-hover block no-underline">← Back</a>
     <MetaInfo

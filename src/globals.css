@@ -1,8 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import "tailwindcss";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@plugin "@tailwindcss/typography";
+
+/* Tailwind combinatory styles */
+.link-hover {
+  @apply transition-all duration-150 hover:text-emerald-300;
+}
 
 html {
   font-family: "Inter", sans-serif;
@@ -16,7 +20,12 @@ html {
   transition-duration: 150ms;
 }
 
-/* Tailwind combinatory styles */
-.link-hover {
-  @apply transition-all duration-150 hover:text-emerald-300;
+/* Overwrite some bad defaults in @tailwindcss/typography */
+blockquote *::before,
+blockquote *::after {
+  content: none;
+}
+code::before,
+code::after {
+  content: none;
 }

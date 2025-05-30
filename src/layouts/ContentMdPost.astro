@@ -1,14 +1,16 @@
 ---
-import BaseMdPost from "@/layouts/BaseMdPost.astro";
+import BaseLayout from "./BaseLayout.astro";
 
 const { frontmatter } = Astro.props;
 ---
 
-<BaseMdPost title={frontmatter.title}>
-  <a href="/fun" class="link-hover mb-4 block no-underline">← Back</a>
-  <h1>
-    {frontmatter.title}
-  </h1>
+<BaseLayout title={frontmatter.title}>
+  <article class="prose prose-invert">
+    <a href="/fun" class="link-hover mb-4 block no-underline">← Back</a>
+    <h1>
+      {frontmatter.title}
+    </h1>
 
-  <slot />
-</BaseMdPost>
+    <slot />
+  </article>
+</BaseLayout>

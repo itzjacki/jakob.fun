@@ -44,6 +44,10 @@ Cool page with cool stuff will appear here some time between now and 2099 ✨
 
 - [ ] Navlinks are a little squishy on deployed version of site (FOUC problem)
 
+## 🎨 Icons
+
+This website uses [Phosphor Icons](https://phosphoricons.com/)
+
 ## 🧞 Commands
 
 All commands are run from the root of the project, from a terminal:

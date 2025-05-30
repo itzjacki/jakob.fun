@@ -34,12 +34,7 @@ function generateExcerpt(body?: string, excerpt?: string) {
                 date={entry.data.publishedDate}
                 transition:name={`blogMeta${entry.id}`}
               />
-              <h2
-                class="mb-2 font-bold"
-                transition:name={`blogHeading${entry.id}`}
-              >
-                {entry.data.title}
-              </h2>
+              <h2 class="mb-2 font-bold">{entry.data.title}</h2>
               <p transition:name={`blogBody${entry.id}`}>
                 {generateExcerpt(entry.body, entry.data.excerpt)}
               </p>

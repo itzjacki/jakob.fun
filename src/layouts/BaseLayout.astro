@@ -2,7 +2,6 @@
 import "@/globals.css";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
-import { ClientRouter } from "astro:transitions";
 import SpeedInsights from "@vercel/speed-insights/astro";
 import Analytics from "@vercel/analytics/astro";
 
@@ -10,21 +9,14 @@ export interface Props {
   title: string;
   gap?: boolean;
   includeNewsletter?: boolean;
-  viewTransitions?: boolean;
 }
 
-const {
-  title,
-  gap = false,
-  includeNewsletter = false,
-  viewTransitions = false,
-} = Astro.props;
+const { title, gap = false, includeNewsletter = false } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en" class="bg-slate-900 text-slate-100">
   <head>
-    {viewTransitions && <ClientRouter />}
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link

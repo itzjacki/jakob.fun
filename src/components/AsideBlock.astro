@@ -8,7 +8,7 @@ const { emoji } = Astro.props;
 
 <aside class="flex gap-4 rounded-md bg-slate-800 p-4">
   <div>{emoji}</div>
-  <div class="[&>*>*>*]:m-0 [&>*>*]:m-0 *:m-0">
+  <div class="*:m-0 [&>*>*]:m-0 [&>*>*>*]:m-0">
     <!-- TODO: Surely there is a better solution than this mess -->
     <slot />
   </div>

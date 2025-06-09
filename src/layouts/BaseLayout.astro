@@ -15,7 +15,7 @@ const { title, gap = false, includeNewsletter = false } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" class="bg-slate-900 text-slate-100">
+<html lang="en" class="text-slate-100">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -42,3 +42,11 @@ const { title, gap = false, includeNewsletter = false } = Astro.props;
     <Footer includeNewsletter={includeNewsletter} />
   </body>
 </html>
+
+<style>
+  html {
+    background-color: #0b0005;
+    background-image:
+      linear-gradient(90deg, #0b0005e0), url("/images/noise.svg");
+  }
+</style>

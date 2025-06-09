@@ -8,6 +8,11 @@
   @apply transition-all duration-150 hover:text-emerald-300;
 }
 
+@theme {
+  --color-offblack: #0b0500;
+  --color-smoky: #14120f;
+}
+
 html {
   font-family: "Inter", sans-serif;
   scrollbar-gutter: stable both-edges;

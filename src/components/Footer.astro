@@ -1,16 +1,8 @@
 ---
-import NewsletterSignup from "./NewsletterSignup.astro";
 import { Icon } from "astro-icon/components";
-
-export interface Props {
-  includeNewsletter: boolean;
-}
-
-const { includeNewsletter } = Astro.props;
 ---
 
-<footer class="mt-16 flex flex-col items-center bg-[#00000022] py-8">
-  {includeNewsletter ? <NewsletterSignup /> : null}
+<footer class="col-span-full flex flex-col items-end bg-[#000] p-1 text-sm">
   <nav class="flex gap-4">
     <a class="link-hover flex align-middle" href="https://github.com/itzjacki"
       ><Icon class="size-6" name="github-logo" />GitHub</a

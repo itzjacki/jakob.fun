@@ -1,0 +1,30 @@
+<div class="flex flex-col gap-4">
+  <label for="vercelInput">
+    How much Vercel traffic will I get for $
+    <input
+      id="vercelInput"
+      type="number"
+      value="500000"
+      min="0"
+      max="10000000"
+      step="100000"
+      inputmode="numeric"
+      onchange="(e) => handleVercelInputInput(e.target.value)"
+    />
+  </label>
+  <details>
+    <summary>Show calculation</summary>
+    <label for="edgeRequests">Edge requests</label><input
+      id="edgeRequests"
+      type="number"
+      readonly
+    />
+  </details>
+  <script is:inline>
+    const edgeRequests = document.getElementById("edgeRequests");
+
+    function handleVercelInputInput(val) {
+      edgeRequests.value = val;
+    }
+  </script>
+</div>

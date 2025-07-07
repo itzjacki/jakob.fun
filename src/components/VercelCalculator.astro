@@ -1,30 +1,66 @@
+---
+const defaultValue = 500000;
+---
+
 <div class="flex flex-col gap-4">
   <label for="vercelInput">
-    How much Vercel traffic will I get for $
-    <input
-      id="vercelInput"
-      type="number"
-      value="500000"
-      min="0"
-      max="10000000"
-      step="100000"
-      inputmode="numeric"
-      onchange="(e) => handleVercelInputInput(e.target.value)"
-    />
-  </label>
-  <details>
+    How much Vercel traffic can I get for $<span id="vercelInputDisplay"
+      >{defaultValue}</span
+    >?</label
+  >
+  <input
+    id="vercelInput"
+    type="range"
+    value={defaultValue}
+    min="0"
+    max="1000000"
+    step="100000"
+    inputmode="numeric"
+    oninput="handleVercelInputInput(this.value)"
+  />
+  <details open>
     <summary>Show calculation</summary>
-    <label for="edgeRequests">Edge requests</label><input
-      id="edgeRequests"
-      type="number"
-      readonly
-    />
+    <table class="w-fit">
+      <thead>
+        <tr>
+          <td>Item</td>
+          <td>Cost</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Edge Request:</td><td id="edgeRequests"></td></tr>
+        <tr><td>Fast Data Transfer:</td><td id="dataTransfer"></td></tr>
+        <tr><td>Fast Origin Transfer:</td><td id="originTransfer"></td></tr>
+        <tr><td>Function Invocations:</td><td id="invocations"></td></tr>
+        <tr><td>Function Duration:</td><td id="duration"></td></tr>
+      </tbody>
+    </table>
   </details>
   <script is:inline>
+    const costToMultiplierRatio = {
+      "20": 500, // assumes 1 dev seat, as opposed to 25 for the other values
+      "100000": 130000,
+      "200000": 250000,
+      "300000": 380000,
+      "400000": 510000,
+      "500000": 640000,
+      "600000": 770000,
+      "700000": 900000,
+      "800000": 1020000,
+      "900000": 1150000,
+      "1000000": 1280000,
+    };
+
+    const vercelInputDisplay = document.getElementById("vercelInputDisplay");
     const edgeRequests = document.getElementById("edgeRequests");
+    const dataTransfer = document.getElementById("dataTransfer");
+    const originTransfer = document.getElementById("originTransfer");
+    const invocations = document.getElementById("invocations");
+    const duration = document.getElementById("duration");
 
     function handleVercelInputInput(val) {
-      edgeRequests.value = val;
+      vercelInputDisplay.innerText = val;
+      edgeRequests.innerText = val * { ratio };
     }
   </script>
 </div>

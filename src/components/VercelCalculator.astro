@@ -1,0 +1,149 @@
+---
+const defaultValue = 500000;
+---
+
+<div class="flex flex-col gap-4 rounded-md bg-slate-800 p-4 md:p-8">
+  <label for="vercelInput" class="text-xl font-bold">
+    How much Vercel traffic can you get for $<span id="vercelInputDisplay"
+      >{defaultValue.toLocaleString(["en-US"])}</span
+    > a year?</label
+  >
+  <input
+    id="vercelInput"
+    type="range"
+    value={defaultValue}
+    min="0"
+    max="1000000"
+    step="100000"
+    inputmode="numeric"
+    oninput="handleVercelInputInput(this.value)"
+    class="accent-emerald-300"
+  />
+  <div class="">
+    <span id="userCount" class="text-xl font-bold"></span> monthly hits
+  </div>
+  <div>
+    (or <span id="multiplierDisplay"></span>x the traffic of this site, at the
+    time of writing)
+  </div>
+  <details>
+    <summary
+      class="w-fit list-none rounded bg-emerald-300 px-4 py-2 text-slate-950"
+      ><span class="in-open:hidden">Show</span><span
+        class="hidden in-open:inline">Hide</span
+      > calculation</summary
+    >
+    <div class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <table class="mt-0 mb-0 w-fit sm:w-full">
+        <thead>
+          <tr>
+            <td>Item</td>
+            <td>Cost breakdown</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Edge Request:</td><td id="edgeRequests"></td></tr>
+          <tr><td>Fast Data Transfer:</td><td id="dataTransfer"></td></tr>
+          <tr><td>Fast Origin Transfer:</td><td id="originTransfer"></td></tr>
+          <tr><td>Function Invocations:</td><td id="invocations"></td></tr>
+          <tr><td>Function Duration:</td><td id="duration"></td></tr>
+          <tr><td id="seatNumber"></td><td id="seatCost"></td></tr>
+        </tbody>
+      </table>
+      <div>
+        <em>Disclaimer:</em>
+        <p class="mt-0 mb-0">
+          This is a <em>very</em> rough estimate of how much Vercel traffic you'll
+          get for a given price. It's based on my own page's usage, but based on
+          what I've seen online it's probably not orders of magnitude off. Cost obviously
+          varies massively based on what kind of website we're talking about, how
+          well optimized it is for Vercel, and how users use it. But we all understand
+          that, so I'll stop disclaiming now.
+        </p>
+      </div>
+    </div>
+  </details>
+  <script is:inline>
+    /* Yeah this is kind of a silly way to do it but doing this with math gives 
+    me a discontinous function, which scares me, there's a reason I did CS,
+    instead of physics or something nerdy like that */
+    const costToMultiplierRatio = {
+      "240": 400, // assumes 1 dev seat, as opposed to 25 for the other values
+      "100000": 130000,
+      "200000": 250000,
+      "300000": 380000,
+      "400000": 510000,
+      "500000": 640000,
+      "600000": 770000,
+      "700000": 900000,
+      "800000": 1020000,
+      "900000": 1150000,
+      "1000000": 1280000,
+    };
+
+    const vercelInputDisplay = document.getElementById("vercelInputDisplay");
+    const edgeRequests = document.getElementById("edgeRequests");
+    const dataTransfer = document.getElementById("dataTransfer");
+    const originTransfer = document.getElementById("originTransfer");
+    const invocations = document.getElementById("invocations");
+    const duration = document.getElementById("duration");
+    const seatNumber = document.getElementById("seatNumber");
+    const seatCost = document.getElementById("seatCost");
+    const userCount = document.getElementById("userCount");
+    const multiplierDisplay = document.getElementById("multiplierDisplay");
+
+    function getCost(included, perUnitCost, unitsPerMonth, multiplier) {
+      return (
+        "$" +
+        Math.round(
+          Math.max(multiplier * unitsPerMonth - included, 0) * perUnitCost * 12,
+        ).toLocaleString(["en-US"])
+      );
+    }
+
+    function handleVercelInputInput(val) {
+      val = Math.max(val, 240);
+
+      vercelInputDisplay.innerText = val.toLocaleString(["en-US"]);
+      const multiplier = costToMultiplierRatio[val]; // number of jakob.fun's worth of traffic
+      multiplierDisplay.innerText = multiplier.toLocaleString(["en-US"]);
+      userCount.innerText = "~" + (400 * multiplier).toLocaleString(["en-US"]);
+
+      edgeRequests.innerText = getCost(
+        10_000_000,
+        0.000002,
+        13_333,
+        multiplier,
+      );
+      dataTransfer.innerText = getCost(
+        1_000_000_000_000,
+        0.00000000015,
+        54_666_667,
+        multiplier,
+      );
+      originTransfer.innerText = getCost(
+        100_000_000_000,
+        0.00000000006,
+        9_333_333,
+        multiplier,
+      );
+      invocations.innerText = getCost(1_000_000, 0.0000006, 2_367, multiplier);
+      duration.innerText = getCost(
+        1_000_000_000_000,
+        0.00000000018,
+        156_666_667,
+        multiplier,
+      );
+
+      if (val > 240) {
+        seatNumber.innerText = "25 developer seats:";
+        seatCost.innerText = "$6,000";
+      } else {
+        seatNumber.innerText = "1 developer seat:";
+        seatCost.innerText = "$240";
+      }
+    }
+
+    handleVercelInputInput(500000);
+  </script>
+</div>

@@ -31,8 +31,6 @@ const { title, gap = false, includeNewsletter = false } = Astro.props;
     />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    <SpeedInsights />
-    <Analytics />
   </head>
   <body class="flex min-h-screen flex-col">
     <Header />
@@ -40,5 +38,7 @@ const { title, gap = false, includeNewsletter = false } = Astro.props;
       <slot />
     </main>
     <Footer includeNewsletter={includeNewsletter} />
+    <SpeedInsights />
+    <Analytics />
   </body>
 </html>
